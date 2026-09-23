@@ -15,12 +15,12 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === "/webhook" && request.method === "POST") {
-      ctx.waitUntil(
-        request
-          .json()
-          .then((u) => processUpdate(u, env))
-          .catch(() => {})
-      );
+      try {
+        const update = await request.json();
+        await processUpdate(update, env);
+      } catch (e) {
+        console.error("Webhook error:", e.message);
+      }
       return new Response("OK");
     }
 
@@ -382,4 +382,4 @@ function prettify(html) {
     }
   }
   return out.join("\n");
-  }
+}
