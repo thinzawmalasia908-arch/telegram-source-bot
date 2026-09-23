@@ -103,8 +103,7 @@ const mainKb = () => ({
 
 async function askJoin(chatId, env, msgId) {
   const text =
-    "🔒 <b>Channel Join လိုအပ်ပါသည်</b>\n" +
-    "━━━━━━━━━━━━━━━━━━━\n\n" +
+    "🔒 <b>Channel Join လိုအပ်ပါသည်</b>\n\n" +
     "🤖 ဒီ Bot ကို အသုံးပြုဖို့အတွက်\n" +
     "ကျွန်တော်တို့ရဲ့ Official Channel ကို\n" +
     "<b>အရင်ဆုံး Join</b> ပေးပါ။\n\n" +
@@ -139,21 +138,16 @@ async function handleMessage(msg, env) {
   if (text === "/start") {
     const name = esc(u.first_name || "there");
     const t =
-      "╔═════════════════════╗\n" +
-       🌟 <b>PREMIUM SOURCE</b> 🌟\n" +
-      "╚═════════════════════╝\n\n" +
+      "🌟 <b>PREMIUM SOURCE</b> 🌟\n\n" +
       `👋 မင်္ဂလာပါ <b>${name}</b> ရေ!\n\n` +
       "🚀 <b>Website Source Code Downloader</b> မှ\n" +
       "ကြိုဆိုပါတယ်။\n\n" +
-      "╭─────────────────────╮\n" +
-      " 💎 <b>ဘယ်လိုအသုံးပြုမလဲ?</b>\n" +
-      "╰─────────────────────╯\n\n" +
-      "  ① Website link ကို copy ကူးပါ\n" +
-      "  ② ဒီ chat ထဲ paste ပြီး ပို့ပါ\n" +
-      "  ③ Source code ဖိုင် ပြန်ရပါမယ် ✅\n\n" +
+      "💎 <b>ဘယ်လိုအသုံးပြုမလဲ?</b>\n" +
+      "① Website link ကို copy ကူးပါ\n" +
+      "② ဒီ chat ထဲ paste ပြီး ပို့ပါ\n" +
+      "③ Source code ဖိုင် ပြန်ရပါမယ် ✅\n\n" +
       "💡 <i>ဥပမာ - https://www.google.com</i>\n\n" +
-      "━━━━━━━━━━━━━━━━━━━\n" +
-      "⚡ <b>Fast</b> • 🎯 <b>Accurate</b> • 🛡 <b>Safe</b>";
+      "⚡ Fast • 🎯 Accurate • 🛡 Safe";
 
     return tg(env, "sendMessage", {
       chat_id: chatId,
@@ -168,9 +162,7 @@ async function handleMessage(msg, env) {
     return tg(env, "sendMessage", {
       chat_id: chatId,
       text:
-        "╭──────────────────────────╮\n" +
-        "│  📖 <b>Help & Guide</b>\n" +
-        "╰──────────────────────────╯\n\n" +
+        "📖 <b>Help & Guide</b>\n\n" +
         "🔹 <b>Commands:</b>\n" +
         "  • /start — Bot ပြန်စတင်ရန်\n" +
         "  • /help — အကူအညီ\n" +
@@ -238,8 +230,7 @@ async function handleCallback(q, env) {
       chat_id: chatId,
       message_id: msgId,
       text:
-        "📖 <b>အသုံးပြုပုံ</b>\n" +
-        "━━━━━━━━━━━━━━━━━━━\n\n" +
+        "📖 <b>အသုံးပြုပုံ</b>\n\n" +
         "1️⃣ Website ဖွင့်ပါ\n" +
         "2️⃣ Link copy ကူးပါ\n" +
         "3️⃣ Chat ထဲ paste ပြီး ပို့ပါ\n" +
@@ -269,9 +260,7 @@ async function handleLink(chatId, raw, env) {
   const sres = await tg(env, "sendMessage", {
     chat_id: chatId,
     text:
-      "╭──────────────────────────╮\n" +
-      "│  ⏳ <b>PROCESSING...</b>\n" +
-      "╰──────────────────────────╯\n\n" +
+      "⏳ <b>PROCESSING...</b>\n\n" +
       "🌐 <i>ချိတ်ဆက်နေပါသည်...</i>",
     parse_mode: "HTML",
   });
@@ -307,10 +296,7 @@ async function handleLink(chatId, raw, env) {
       await tg(env, "editMessageText", {
         chat_id: chatId,
         message_id: sid,
-        text:
-          "╭──────────────────────────╮\n" +
-          "│  ⚙️ <b>FORMATTING...</b>\n" +
-          "╰──────────────────────────╯",
+        text: "⚙️ <b>FORMATTING...</b>",
         parse_mode: "HTML",
       });
     }
@@ -320,15 +306,12 @@ async function handleLink(chatId, raw, env) {
     const kb = (new TextEncoder().encode(pretty).length / 1024).toFixed(2);
 
     const cap =
-      "╔══════════════════════════╗\n" +
-      "     ✅ <b>SUCCESS</b> ✅\n" +
-      "╚══════════════════════════╝\n\n" +
+      "✅ <b>SUCCESS</b>\n\n" +
       `🌐 <b>Domain:</b> <code>${esc(domain)}</code>\n` +
       `⏱ <b>Time:</b> <code>${secs}s</code>\n` +
       `📦 <b>Size:</b> <code>${kb} KB</code>\n` +
       (truncated ? "✂️ <i>(ဖိုင် ကြီးလို့ ဖြတ်ထားသည်)</i>\n" : "") +
-      "\n━━━━━━━━━━━━━━━━━━━\n" +
-      "💎 <b>Premium Source Downloader</b>";
+      "\n💎 <b>Premium Source Downloader</b>";
 
     await tgDoc(env, chatId, `${domain}_source.txt`, pretty, cap);
 
